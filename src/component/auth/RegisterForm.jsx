@@ -1,9 +1,11 @@
 import { Button, TextField, Typography } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { registerUser } from '../State/Authentication/Action';
 
 const initialValues = {
     fullName : "",
@@ -13,10 +15,11 @@ const initialValues = {
 }
 
 const RegisterForm = () => {
-    const handleSubmit = (values) => {
-        console.log("Field Values", values)
-    }
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const handleSubmit = (values) => {
+        dispatch(registerUser({userData: values, navigate}))
+    }
   return (
     <div className='bg-[#000001] p-3'>
         <Typography variant='h5' className='text-center'>
